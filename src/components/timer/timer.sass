@@ -1,0 +1,99 @@
+.timer
+	width: 100%
+	position: relative
+	height: 50px
+	display: flex
+	align-items: center
+	padding: 0 20px 0 30px
+	background-color: $dark
+	margin-bottom: 10px
+	border-radius: 3px
+	&:last-child
+		margin-bottom: 0
+	&__name
+		display: block
+		color: $light-text
+		width: 60%
+	&__value
+		display: block
+		color: $light-text
+	&__buttons
+		margin-left: auto
+		display: flex
+	&__button
+		background: none
+		border: none
+		padding: 6px
+		cursor: pointer
+		margin-right: 10px
+		outline: none
+		svg
+			width: 12px
+			max-width: 12px
+			display: block
+		path
+			fill: $text
+			transition-duration: .3s
+		&:last-child
+			margin-right: 0
+		&:hover, &:focus
+			& > svg
+				& > path
+					fill: $light-text
+	&__open
+		position: relative
+		svg
+			width: 15px
+			max-width: 15px
+		&:hover, &:focus
+			.timer__options
+				opacity: 1
+				pointer-events: auto
+	&__options
+		position: absolute
+		left: 50%
+		bottom: 0
+		transform: translate(-50%, 100%)
+		padding: 5px
+		background-color: $blue
+		border: 1px solid $text
+		border-radius: 5px
+		pointer-events: none
+		opacity: 0
+		transition-duration: .3s
+		z-index: 5
+		display: flex
+		align-items: center
+		&::after
+			content: ""
+			display: block
+			position: absolute
+			left: 0
+			right: 0
+			margin: 0 auto
+			top: -9px
+			width: 0
+			height: 0
+			border: 5px solid transparent
+			border-bottom-color: $blue
+			z-index: 7
+		&::before
+			content: ""
+			display: block
+			position: absolute
+			left: 0
+			right: 0
+			margin: 0 auto
+			top: -10px
+			width: 0
+			height: 0
+			border: 5px solid transparent
+			border-bottom-color: $text
+			z-index: 6
+	&__delete
+		svg
+			width: 15px
+	&__edit
+		svg
+			width: 18px
+			max-width: 18px
