@@ -1,0 +1,43 @@
+.sidebar
+	width: 100%
+	max-width: 320px
+	background-color: $dark
+	border-radius: 3px
+	padding: 15px 0
+	height: 100%
+	overflow: auto
+	&__list
+		padding: 0
+		margin: 0
+		list-style-type: none
+	&-item
+		width: 100%
+		display: block
+		position: relative
+		transition-duration: .3s
+		&:hover
+			background-color: rgba($text, .3)
+			&::after
+				opacity: 0
+		&::after
+			content: ""
+			display: block
+			position: absolute
+			bottom: 0
+			left: 0
+			right: 0
+			margin: 0 auto
+			width: 80%
+			height: 1px
+			background-color: $text
+			opacity: .4
+			transition-duration: .3s
+		&__link
+			color: $light-text
+			text-decoration: none
+			font-size: 14px
+			padding: 10px 30px
+			display: block
+			transition-duration: .15s
+			&_active
+				color: $red

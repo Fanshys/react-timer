@@ -1,0 +1,47 @@
+.checklist
+	width: 100%
+	background-color: $dark
+	margin-left: 15px
+	padding: 15px 30px
+	border-radius: 3px
+	max-height: 100%
+	overflow: auto
+	&__list
+		padding: 0
+		margin: 0
+		list-style-type: none
+	&-item
+		width: 100%
+		border-bottom: 1px solid rgba($text, .3)
+		overflow: hidden
+		transition-duration: .3s
+		&:hover
+			background-color: rgba($text, .1)
+			border-color: transparent
+		&_checked
+			.checklist-item__checkbox
+				transform: none
+				opacity: 1
+			.checklist-item__name
+				text-decoration: line-through
+		&__label
+			padding: 10px 30px 10px 10px
+			position: relative
+			cursor: pointer
+			display: flex
+			align-items: center
+		&__checkbox
+			max-width: 14px
+			margin-right: 10px
+			transition-duration: .3s
+			transform: translateX(-10px)
+			opacity: 0
+			svg
+				display: block
+		&__input
+			opacity: 0
+			display: none
+			z-index: -1
+		&__name
+			font-size: 14px
+			transition-duration: .3s

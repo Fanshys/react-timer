@@ -10,14 +10,14 @@ class Timers extends React.Component {
 				timeValue: 600000
 			},
 			{
-				name: 'My best incredible timer with longest name in history of this fucking world',
+				name: 'My best incredible timer with longest name in the history of this fucking world',
 				id: 2,
-				timeValue: 600000
+				timeValue: 0
 			},
 			{
 				name: 'My timer 3',
 				id: 3,
-				timeValue: 600000
+				timeValue: 0
 			},
 		]
 
