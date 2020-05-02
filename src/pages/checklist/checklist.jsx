@@ -1,11 +1,11 @@
 import React from 'react';
+import {
+  useParams
+} from "react-router-dom";
 
 const Checklist = (props) => {
-	return (
-		<section className="checklist">
-			
-		</section>
-	)
+	let { topicId } = useParams();
+  return <h3>Requested topic ID: {topicId}</h3>;
 }
 
 export default Checklist;

@@ -75,7 +75,7 @@ const Header = (props) => {
 						<Link to="/" className="header-menu__link">Таймеры</Link>
 					</li>
 					<li className="header-menu__item">
-						<Link to="/checklist" className="header-menu__link">Чеклисты</Link>
+						<Link to="/checklist:123" className="header-menu__link">Чеклисты</Link>
 					</li>
 				</ul>
 			</nav>

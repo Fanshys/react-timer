@@ -5,16 +5,19 @@ class Timers extends React.Component {
 	render() {
 		const timersArray = [
 			{
-				time: '01:02:45',
-				name: 'My timer'
+				name: 'My timer',
+				id: 1,
+				timeValue: 600000
 			},
 			{
-				time: '05:02:45',
-				name: 'My timer 2'
+				name: 'My best incredible timer with longest name in history of this fucking world',
+				id: 2,
+				timeValue: 600000
 			},
 			{
-				time: '01:42:45',
-				name: 'My timer 3'
+				name: 'My timer 3',
+				id: 3,
+				timeValue: 600000
 			},
 		]
 
@@ -23,8 +26,8 @@ class Timers extends React.Component {
 				<div className="container">
 					<h1>Таймеры</h1>
 					<div className="timers__items">
-						{timersArray.map((timer, key) => {
-							return <Timer time={timer.time} name={timer.name} key={key} />
+						{timersArray.map((timer) => {
+							return <Timer name={timer.name} key={timer.id} timeValue={timer.timeValue}/>
 						})}
 					</div>
 					<div className="timers-create">

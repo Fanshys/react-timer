@@ -3,26 +3,63 @@ import React from 'react';
 class Timer extends React.Component {
 	constructor(props) {
 		super(props);
+		
+		this.startTime = new Date();
+		this.running = false;
+		this.timeValue = props.timeValue ? props.timeValue : 0;
+		this.timeout = false;
+
 		this.state = {
-			time: props.time,
+			time: this.timeConvert(),
 			name: props.name,
-			running: false
 		};
 	}
 
 	start() {
-		this.setState({ running: true });
+		this.startTime = new Date() - this.timeValue;
+		this.running = true;
+		this.tick();
 	}
 
 	pause() {
-		this.setState({ running: false });
+		this.running = false;
 	}
 
 	stop() {
 		this.setState({
-			running: false,
 			time: '00:00:00'
 		});
+		this.running = false;
+		this.timeValue = 0;
+	}
+
+	tick() {
+		if (this.running) {
+			this.timeValue = new Date() - this.startTime;
+			this.setState({
+				time: this.timeConvert()
+			});
+
+			this.timeout = setTimeout(() => {
+				this.tick();
+			}, 1000);
+		}
+	}
+
+	timeConvert() {
+		let seconds = Math.floor(this.timeValue / 1000 % 60),
+			minutes = Math.floor(this.timeValue / 1000 / 60 % 60),
+			hours = Math.floor(this.timeValue / 1000 / 3600);
+
+		seconds = this.timeToFormat(seconds);
+		minutes = this.timeToFormat(minutes);
+		hours = this.timeToFormat(hours);
+
+		return `${hours}:${minutes}:${seconds}`;
+	}
+
+	timeToFormat(num) {
+		return num < 10 ? '0' + num : num;
 	}
 
 	render() {

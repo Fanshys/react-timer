@@ -13,7 +13,7 @@ function App() {
       <Router>
         <Header authorized={true}/>
         <Switch>
-          <Route path="/checklist">
+          <Route path="/checklist:topicId">
             <Checklist />
           </Route>
           <Route path="/">
