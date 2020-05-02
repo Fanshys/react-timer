@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import HeaderProfile from './header-profile';
 
 const Header = (props) => {
@@ -72,10 +72,10 @@ const Header = (props) => {
 			<nav className="header-menu">
 				<ul className="header-menu__list">
 					<li className="header-menu__item">
-						<Link to="/" className="header-menu__link">Таймеры</Link>
+						<NavLink exact to="/" className="header-menu__link" activeClassName="header-menu__link_active">Таймеры</NavLink>
 					</li>
 					<li className="header-menu__item">
-						<Link to="/checklist" className="header-menu__link">Чеклисты</Link>
+						<NavLink to="/checklist" className="header-menu__link" activeClassName="header-menu__link_active">Чеклисты</NavLink>
 					</li>
 				</ul>
 			</nav>
