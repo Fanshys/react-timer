@@ -1,7 +1,7 @@
 import React from 'react';
-import Timer from '../../components/timer/timer';
+import Timer from './timer/timer';
 import { connect } from 'react-redux';
-import CreateTimer from '../../components/createTimer/createTimer';
+import CreateTimer from './createTimer/createTimer';
 
 const Timers = ({timers}) => {
 	return (
@@ -10,7 +10,7 @@ const Timers = ({timers}) => {
 				<h1>Таймеры</h1>
 				<div className="timers__items">
 					{timers.map((timer) => {
-						return <Timer name={timer.name} key={timer.id} timeValue={timer.timeValue} />
+						return <Timer name={timer.name} key={timer.id} timeValue={timer.time} id={timer.id}/>
 					})}
 				</div>
 				<CreateTimer />

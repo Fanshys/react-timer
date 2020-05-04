@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { createTimer } from '../../store/timers/actions'
+import { createTimer } from '../../../store/timers/actions'
 
 class CreateTimer extends React.Component {
 	constructor(props) {

@@ -1,6 +1,6 @@
 import React from 'react';
-import Checklist from '../../components/checklist/checklist';
-import Sidebar from '../../components/sidebar/sidebar';
+import Checklist from './checklist/checklist';
+import Sidebar from './sidebar/sidebar';
 import { useParams } from "react-router-dom";
 
 const checklistDate = {

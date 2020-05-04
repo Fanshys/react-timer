@@ -1,20 +1,71 @@
 import React from 'react';
+import { deleteTimer, setTimerTime } from '../../../store/timers/actions'
+import { connect } from 'react-redux';
 
-export default class Timer extends React.Component {
+class Timer extends React.Component {
 	constructor(props) {
 		super(props);
 		
-		// this.startTime = new Date();
-		// this.running = false;
-		// this.timeValue = props.time ? props.time : 0;
-		// this.timeout = false;
+		this.startTime = new Date();
+		this.running = false;
+	}
+
+	start() {
+		this.startTime = new Date() - this.props.timeValue;
+		this.running = true;
+		this.tick();
+	}
+
+	pause() {
+		this.running = false;
+	}
+
+	stop() {
+		this.running = false;
+		this.props.setTimerTime({
+			id: this.props.id,
+			time: 0
+		})
+	}
+
+	tick() {
+		if (this.running) {
+			this.props.setTimerTime({
+				id: this.props.id,
+				time: new Date() - this.startTime
+			})
+
+			setTimeout(() => {
+				this.tick();
+			}, 1000);
+		}
+	}
+
+	timeConvert() {
+		let seconds = Math.floor(this.props.timeValue / 1000 % 60),
+			minutes = Math.floor(this.props.timeValue / 1000 / 60 % 60),
+			hours = Math.floor(this.props.timeValue / 1000 / 3600);
+
+		seconds = this.timeToFormat(seconds);
+		minutes = this.timeToFormat(minutes);
+		hours = this.timeToFormat(hours);
+
+		return `${hours}:${minutes}:${seconds}`;
+	}
+
+	timeToFormat(num) {
+		return num < 10 ? '0' + num : num;
+	}
+
+	delete() {
+		this.props.deleteTimer(this.props.id);
 	}
 
 	render() {
 		return (
 			<div className="timer">
 				<span className="timer__name">{this.props.name}</span>
-				<span className="timer__value">{this.props.time}</span>
+				<span className="timer__value">{this.timeConvert()}</span>
 				<div className="timer__buttons">
 					<button className="timer__button" onClick={() => this.start()}>
 						<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -52,53 +103,11 @@ export default class Timer extends React.Component {
 			</div>
 		);
 	}
-
-	// start() {
-	// 	this.startTime = new Date() - this.timeValue;
-	// 	this.running = true;
-	// 	this.tick();
-	// }
-
-	// pause() {
-	// 	this.running = false;
-	// }
-
-	// stop() {
-	// 	this.setState({
-	// 		time: '00:00:00'
-	// 	});
-	// 	this.running = false;
-	// 	this.timeValue = 0;
-	// }
-
-	// tick() {
-	// 	if (this.running) {
-	// 		this.timeValue = new Date() - this.startTime;
-	// 		this.setState({
-	// 			time: this.timeConvert()
-	// 		});
-
-	// 		this.props.setTimerTime();
-
-	// 		this.timeout = setTimeout(() => {
-	// 			this.tick();
-	// 		}, 1000);
-	// 	}
-	// }
-
-	// timeConvert() {
-	// 	let seconds = Math.floor(this.timeValue / 1000 % 60),
-	// 		minutes = Math.floor(this.timeValue / 1000 / 60 % 60),
-	// 		hours = Math.floor(this.timeValue / 1000 / 3600);
-
-	// 	seconds = this.timeToFormat(seconds);
-	// 	minutes = this.timeToFormat(minutes);
-	// 	hours = this.timeToFormat(hours);
-
-	// 	return `${hours}:${minutes}:${seconds}`;
-	// }
-
-	// timeToFormat(num) {
-	// 	return num < 10 ? '0' + num : num;
-	// }
 }
+
+const mapDispatchToProps = {
+	deleteTimer,
+	setTimerTime
+}
+
+export default connect(null, mapDispatchToProps)(Timer)

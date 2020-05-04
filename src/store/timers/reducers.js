@@ -1,4 +1,4 @@
-import { CREATE_TIMER, TIMER_CHANGE_NAME, TIMER_CHANGE_TIME } from "./actions";
+import { CREATE_TIMER, TIMER_CHANGE_NAME, TIMER_CHANGE_TIME, DELETE_TIMER } from "./actions";
 
 const defaultState = {
 	timers: []
@@ -12,6 +12,14 @@ export const timersReducer = (state = defaultState, action) => {
 				timers: [...state.timers, action.payload]
 			}
 
+		case DELETE_TIMER:
+			return {
+				...state,
+				timers: state.timers.filter(timer => {
+					return timer.id !== action.payload
+				})
+			}
+
 		case TIMER_CHANGE_NAME:
 			return {
 				...state,
@@ -21,7 +29,12 @@ export const timersReducer = (state = defaultState, action) => {
 		case TIMER_CHANGE_TIME:
 			return {
 				...state,
-				time: action.payload
+				timers: [...state.timers].map(timer => {
+					if (timer.id === action.payload.id) {
+						timer.time = action.payload.time
+					}
+					return timer
+				})
 			}
 
 		default:
