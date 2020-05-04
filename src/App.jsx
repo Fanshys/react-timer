@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // import Loader from './components/loader/loader';
 import Header from './components/header/header';
@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       {/* <Loader /> */}
       <Router>
-        <Header authorized={true}/>
+        <Header authorized={true} />
         <Switch>
           <Route path={["/checklist/:id", "/checklist"]}>
             <Checklists />

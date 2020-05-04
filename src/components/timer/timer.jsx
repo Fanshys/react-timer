@@ -1,72 +1,20 @@
 import React from 'react';
 
-class Timer extends React.Component {
+export default class Timer extends React.Component {
 	constructor(props) {
 		super(props);
 		
-		this.startTime = new Date();
-		this.running = false;
-		this.timeValue = props.timeValue ? props.timeValue : 0;
-		this.timeout = false;
-
-		this.state = {
-			time: this.timeConvert(),
-			name: props.name,
-		};
-	}
-
-	start() {
-		this.startTime = new Date() - this.timeValue;
-		this.running = true;
-		this.tick();
-	}
-
-	pause() {
-		this.running = false;
-	}
-
-	stop() {
-		this.setState({
-			time: '00:00:00'
-		});
-		this.running = false;
-		this.timeValue = 0;
-	}
-
-	tick() {
-		if (this.running) {
-			this.timeValue = new Date() - this.startTime;
-			this.setState({
-				time: this.timeConvert()
-			});
-
-			this.timeout = setTimeout(() => {
-				this.tick();
-			}, 1000);
-		}
-	}
-
-	timeConvert() {
-		let seconds = Math.floor(this.timeValue / 1000 % 60),
-			minutes = Math.floor(this.timeValue / 1000 / 60 % 60),
-			hours = Math.floor(this.timeValue / 1000 / 3600);
-
-		seconds = this.timeToFormat(seconds);
-		minutes = this.timeToFormat(minutes);
-		hours = this.timeToFormat(hours);
-
-		return `${hours}:${minutes}:${seconds}`;
-	}
-
-	timeToFormat(num) {
-		return num < 10 ? '0' + num : num;
+		// this.startTime = new Date();
+		// this.running = false;
+		// this.timeValue = props.time ? props.time : 0;
+		// this.timeout = false;
 	}
 
 	render() {
 		return (
 			<div className="timer">
-				<span className="timer__name">{this.state.name}</span>
-				<span className="timer__value">{this.state.time}</span>
+				<span className="timer__name">{this.props.name}</span>
+				<span className="timer__value">{this.props.time}</span>
 				<div className="timer__buttons">
 					<button className="timer__button" onClick={() => this.start()}>
 						<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -104,6 +52,53 @@ class Timer extends React.Component {
 			</div>
 		);
 	}
-}
 
-export default Timer;
+	// start() {
+	// 	this.startTime = new Date() - this.timeValue;
+	// 	this.running = true;
+	// 	this.tick();
+	// }
+
+	// pause() {
+	// 	this.running = false;
+	// }
+
+	// stop() {
+	// 	this.setState({
+	// 		time: '00:00:00'
+	// 	});
+	// 	this.running = false;
+	// 	this.timeValue = 0;
+	// }
+
+	// tick() {
+	// 	if (this.running) {
+	// 		this.timeValue = new Date() - this.startTime;
+	// 		this.setState({
+	// 			time: this.timeConvert()
+	// 		});
+
+	// 		this.props.setTimerTime();
+
+	// 		this.timeout = setTimeout(() => {
+	// 			this.tick();
+	// 		}, 1000);
+	// 	}
+	// }
+
+	// timeConvert() {
+	// 	let seconds = Math.floor(this.timeValue / 1000 % 60),
+	// 		minutes = Math.floor(this.timeValue / 1000 / 60 % 60),
+	// 		hours = Math.floor(this.timeValue / 1000 / 3600);
+
+	// 	seconds = this.timeToFormat(seconds);
+	// 	minutes = this.timeToFormat(minutes);
+	// 	hours = this.timeToFormat(hours);
+
+	// 	return `${hours}:${minutes}:${seconds}`;
+	// }
+
+	// timeToFormat(num) {
+	// 	return num < 10 ? '0' + num : num;
+	// }
+}
