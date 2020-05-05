@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { createTimer } from '../../../store/timers/actions'
+import { createChecklist } from '../../../store/checklists/actions'
 
-class CreateTimer extends React.Component {
+class CreateChecklist extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -11,16 +11,16 @@ class CreateTimer extends React.Component {
 		}
 	}
 
-	sendCreateTimer = event => {
+	sendCreateChecklist = event => {
 		event.preventDefault();
 		const { name } = this.state;
-		const newTimer = {
+		const newList = {
 			name,
-			time: 0,
-			id: new Date().getTime()
+			id: new Date().getTime(),
+			items: []
 		}
 
-		this.props.createTimer(newTimer);
+		this.props.createChecklist(newList);
 		this.setState({
 			name: ''
 		})
@@ -37,22 +37,22 @@ class CreateTimer extends React.Component {
 
 	render() {
 		return (
-			<form className="timers-create" onSubmit={this.sendCreateTimer}>
+			<form className="checklists-create" onSubmit={this.sendCreateChecklist}>
 				<input
 					type="text"
-					className="timers-create__input input"
+					className="checklists-create__input input"
 					placeholder="Введите название"
 					value={this.state.name}
 					onChange={this.changeInput}
 				/>
-				<button type="submit" className="timers-create__submit button">Создать</button>
+				<button type="submit" className="checklists-create__submit button">Создать</button>
 			</form>
 		)
 	}
 }
 
 const mapDispatchToProps = {
-	createTimer
+	createChecklist
 }
 
-export default connect(null, mapDispatchToProps)(CreateTimer)
+export default connect(null, mapDispatchToProps)(CreateChecklist)

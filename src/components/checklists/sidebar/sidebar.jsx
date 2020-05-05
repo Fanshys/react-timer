@@ -1,22 +1,29 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import { connect } from 'react-redux';
 
-const Sidebar = (props) => {
+
+const Sidebar = ({ lists }) => {
 	return (
 		<aside className="sidebar">
 			<ul className="sidebar__list">
-				<li className="sidebar-item">
-					<NavLink to="/checklist/1" className="sidebar-item__link" activeClassName="sidebar-item__link_active">Чеклист 1</NavLink>
-				</li>
-				<li className="sidebar-item">
-					<NavLink to="/checklist/2" className="sidebar-item__link" activeClassName="sidebar-item__link_active">Чеклист 2</NavLink>
-				</li>
-				<li className="sidebar-item">
-					<NavLink to="/checklist/3" className="sidebar-item__link" activeClassName="sidebar-item__link_active">Чеклист 3</NavLink>
-				</li>
+				{lists.map(list => {
+					return (
+						<li className="sidebar-item" key={list.id}>
+							<NavLink to={`/checklist/${list.id}`} className="sidebar-item__link" activeClassName="sidebar-item__link_active">{list.name}</NavLink>
+						</li>
+					)
+				})}
 			</ul>
+			<Link to="/checklist/create" className="button sidebar__create">Создать</Link>
 		</aside>
 	)
 }
 
-export default Sidebar;
+const mapStateToProps = state => {
+	return {
+		lists: state.lists.lists
+	}
+}
+
+export default connect(mapStateToProps, null)(Sidebar);

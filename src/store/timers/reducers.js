@@ -1,4 +1,4 @@
-import { CREATE_TIMER, TIMER_CHANGE_NAME, TIMER_CHANGE_TIME, DELETE_TIMER } from "./actions";
+import { CREATE_TIMER, TIMER_CHANGE_NAME, TIMER_CHANGE_TIME, DELETE_TIMER, LOAD_TIMERS } from "./actions";
 
 const defaultState = {
 	timers: []
@@ -35,6 +35,12 @@ export const timersReducer = (state = defaultState, action) => {
 					}
 					return timer
 				})
+			}
+
+		case LOAD_TIMERS:
+			return {
+				...state,
+				timers: [...state.timers, ...action.payload]
 			}
 
 		default:

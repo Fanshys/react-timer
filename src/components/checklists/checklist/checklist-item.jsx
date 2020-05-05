@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { setChecklistItemChecked } from '../../../store/checklists/actions';
+import { connect } from 'react-redux';
 
 const ChecklistItem = (props) => {
-	const [checked, setChecked] = useState(props.checked);
 
 	const classes = ['checklist-item']
 
-	if (checked) {
+	if (props.checked) {
 		classes.push('checklist-item_checked')
 	}
 
@@ -14,8 +15,12 @@ const ChecklistItem = (props) => {
 			<label className="checklist-item__label">
 				<input
 					type="checkbox"
-					checked={checked}
-					onChange={() => setChecked(!checked)}
+					checked={props.checked}
+					onChange={() => props.setChecklistItemChecked({
+						id: props.parentId,
+						itemId: props.id,
+						checked: !props.checked
+					})}
 					className="checklist-item__input"
 				/>
 				<span className="checklist-item__checkbox">
@@ -29,4 +34,8 @@ const ChecklistItem = (props) => {
 	)
 }
 
-export default ChecklistItem;
+const mapDispatchToProps = {
+	setChecklistItemChecked
+}
+
+export default connect(null, mapDispatchToProps)(ChecklistItem)

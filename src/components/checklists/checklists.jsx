@@ -1,79 +1,15 @@
 import React from 'react';
 import Checklist from './checklist/checklist';
 import Sidebar from './sidebar/sidebar';
-import { useParams } from "react-router-dom";
+import { useParams, Switch, Route } from "react-router-dom";
+import { connect } from 'react-redux';
+import CreateChecklist from './createChecklist/createChecklist';
 
-const checklistDate = {
-  1: {
-    1: {
-      name: 'Проверить то то',
-      checked: false
-    },
-    2: {
-      name: 'Скачать пятое',
-      checked: false
-    },
-    3: {
-      name: 'Попробовать десятое',
-      checked: false
-    },
-    4: {
-      name: 'Проверить то то',
-      checked: false
-    },
-    5: {
-      name: 'Проверить то то',
-      checked: false
-    },
-  },
-  2: {
-    1: {
-      name: 'Проверить то то 3',
-      checked: false
-    },
-    2: {
-      name: 'Скачать пятое 5',
-      checked: false
-    },
-    3: {
-      name: 'Попробовать десятое',
-      checked: false
-    },
-    4: {
-      name: 'Проверить то то',
-      checked: false
-    },
-    5: {
-      name: 'Проверить то то',
-      checked: false
-    },
-  },
-  3: {
-    1: {
-      name: 'Проверить то то',
-      checked: false
-    },
-    2: {
-      name: 'Скачать пятое',
-      checked: false
-    },
-    3: {
-      name: 'Попробовать десятое',
-      checked: false
-    },
-    4: {
-      name: 'Проверить т41',
-      checked: false
-    },
-    5: {
-      name: 'Проверить 1441о',
-      checked: false
-    },
-  },
-}
-
-const Checklists = (props) => {
-  let {id} = useParams();
+const Checklists = ({ lists }) => {
+  const { id } = useParams();
+  const list = lists.find(list => {
+    return Number(list.id) === Number(id)
+  });
 
   return (
     <section className="checklists">
@@ -82,8 +18,15 @@ const Checklists = (props) => {
         <div className="checklists__wrapper">
           <Sidebar />
           <div className="checklist">
-            {id && <Checklist checklist={checklistDate[id]} id={id} />}
-            {!id && 'Создайте новый или выберите существующий чеклист'}
+            <Switch>
+              <Route path="/checklist/create">
+                <CreateChecklist />
+              </Route>
+              <Route path="/checklist/:id">
+                {list && <Checklist checklist={list} />}
+                {!list && 'Создайте новый или выберите существующий чеклист'}
+              </Route>
+            </Switch>
           </div>
         </div>
       </div>
@@ -91,4 +34,10 @@ const Checklists = (props) => {
   )
 }
 
-export default Checklists;
+const mapStateToProps = state => {
+  return {
+    lists: state.lists.lists
+  }
+}
+
+export default connect(mapStateToProps, null)(Checklists);
