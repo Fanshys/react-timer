@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import ChecklistItem from './checklist-item';
+import ChecklistItem from './checklistItem';
+import CreateChecklistItem from './createChecklistItem';
 
 const Checklist = (props) => {
 	return (
@@ -10,6 +11,7 @@ const Checklist = (props) => {
 					return <ChecklistItem name={checklist.name} key={`${checklist.id}-${key}`} checked={checklist.checked} id={checklist.id} parentId={props.checklist.id} />
 				})}
 			</ul>
+			<CreateChecklistItem id={props.checklist.id}/>
 		</Fragment>
 	)
 }

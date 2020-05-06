@@ -1,7 +1,7 @@
 import React from 'react';
-import Timer from './timer/timer';
+import Timer from './timer';
 import { connect } from 'react-redux';
-import CreateTimer from './createTimer/createTimer';
+import CreateTimer from './createTimer';
 
 const Timers = ({timers}) => {
 	return (

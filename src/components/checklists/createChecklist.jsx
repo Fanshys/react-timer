@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { createChecklist } from '../../../store/checklists/actions'
+import { createChecklist } from '../../store/checklists/actions'
+import { showNotice, hideNotice } from '../../store/notice/actions'
 
 class CreateChecklist extends React.Component {
 	constructor(props) {
@@ -14,16 +15,24 @@ class CreateChecklist extends React.Component {
 	sendCreateChecklist = event => {
 		event.preventDefault();
 		const { name } = this.state;
-		const newList = {
-			name,
-			id: new Date().getTime(),
-			items: []
-		}
+		if (name.length) {
+			const newList = {
+				name,
+				id: new Date().getTime(),
+				items: []
+			}
+	
+			this.props.createChecklist(newList);
+			this.setState({
+				name: ''
+			})
+		} else {
+			this.props.showNotice({
+				text: 'Введите название чеклиста'
+			})
 
-		this.props.createChecklist(newList);
-		this.setState({
-			name: ''
-		})
+			setTimeout(() => this.props.hideNotice(), 3000)
+		}
 	}
 
 	changeInput = event => {
@@ -52,7 +61,9 @@ class CreateChecklist extends React.Component {
 }
 
 const mapDispatchToProps = {
-	createChecklist
+	createChecklist,
+	showNotice,
+	hideNotice
 }
 
 export default connect(null, mapDispatchToProps)(CreateChecklist)

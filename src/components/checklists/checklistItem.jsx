@@ -1,5 +1,5 @@
 import React from 'react';
-import { setChecklistItemChecked } from '../../../store/checklists/actions';
+import { setChecklistItemChecked } from '../../store/checklists/actions';
 import { connect } from 'react-redux';
 
 const ChecklistItem = (props) => {

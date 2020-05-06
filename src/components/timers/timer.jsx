@@ -1,5 +1,5 @@
 import React from 'react';
-import { deleteTimer, setTimerTime } from '../../../store/timers/actions'
+import { deleteTimer, setTimerTime } from '../../store/timers/actions'
 import { connect } from 'react-redux';
 
 class Timer extends React.Component {

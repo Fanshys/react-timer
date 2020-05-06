@@ -1,7 +1,7 @@
 import React from 'react';
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { connect } from 'react-redux';
-
+import CreateChecklist from './createChecklist'
 
 const Sidebar = ({ lists }) => {
 	return (
@@ -15,7 +15,7 @@ const Sidebar = ({ lists }) => {
 					)
 				})}
 			</ul>
-			<Link to="/checklist/create" className="button sidebar__create">Создать</Link>
+			<CreateChecklist />
 		</aside>
 	)
 }

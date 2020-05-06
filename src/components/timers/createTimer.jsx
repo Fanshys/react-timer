@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { createTimer } from '../../../store/timers/actions'
+import { createTimer } from '../../store/timers/actions'
+import { showNotice, hideNotice } from '../../store/notice/actions'
 
 class CreateTimer extends React.Component {
 	constructor(props) {
@@ -14,16 +15,24 @@ class CreateTimer extends React.Component {
 	sendCreateTimer = event => {
 		event.preventDefault();
 		const { name } = this.state;
-		const newTimer = {
-			name,
-			time: 0,
-			id: new Date().getTime()
-		}
+		if (name.length) {
+			const newTimer = {
+				name,
+				time: 0,
+				id: new Date().getTime()
+			}
+	
+			this.props.createTimer(newTimer);
+			this.setState({
+				name: ''
+			})
+		} else {
+			this.props.showNotice({
+				text: 'Введите название таймера'
+			})
 
-		this.props.createTimer(newTimer);
-		this.setState({
-			name: ''
-		})
+			setTimeout(() => this.props.hideNotice(), 3000)
+		}
 	}
 
 	changeInput = event => {
@@ -52,7 +61,9 @@ class CreateTimer extends React.Component {
 }
 
 const mapDispatchToProps = {
-	createTimer
+	createTimer,
+	showNotice,
+	hideNotice
 }
 
 export default connect(null, mapDispatchToProps)(CreateTimer)

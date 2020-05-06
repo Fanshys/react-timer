@@ -33,7 +33,10 @@ export const checklistsReducer = (state = defaultState, action) => {
 				...state,
 				lists: [...state.lists].map(list => {
 					if (list.id === action.payload.id) {
-						list.items.push(action.payload.item)
+						return {
+							...list,
+							items: [...list.items, action.payload.item]
+						}
 					}
 					return list
 				})
