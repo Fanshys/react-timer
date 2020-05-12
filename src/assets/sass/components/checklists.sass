@@ -1,3 +1,11 @@
+@keyframes showCreate
+	0%
+		transform: translateY(10px)
+		opacity: 0
+	100%
+		transform: none
+		opacity: 1
+
 .checklists
 	color: $light-text
 	&__container
@@ -8,8 +16,21 @@
 		position: relative
 		height: calc(100vh - 137px)
 	&-create
+		position: absolute
+		left: 0
+		bottom: 0
 		display: flex
 		padding: 10px
+		transform: translateY(10px)
+		opacity: 0
+		pointer-events: none
+		transition-duration: .3s
+		&_visible
+			opacity: 1
+			transform: none
+			pointer-events: auto
+		&_inner
+			padding-left: 0
 		&__input
 			margin-right: 10px
 			height: 34px

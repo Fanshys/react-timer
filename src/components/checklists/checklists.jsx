@@ -1,27 +1,34 @@
 import React from 'react';
 import Checklist from './checklist';
 import Sidebar from './sidebar';
-import { useParams } from "react-router-dom";
 import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
 
-const Checklists = ({ lists }) => {
-  const { id } = useParams();
-  const list = lists.find(list => Number(list.id) === Number(id));
+class Checklists extends React.Component {
+  componentDidUpdate() {
+    const json = JSON.stringify(this.props.lists)
 
-  return (
-    <section className="checklists">
-      <div className="checklists__container">
-        <h1>Чеклисты</h1>
-        <div className="checklists__wrapper">
-          <Sidebar />
-          <div className="checklist">
-            {list && <Checklist checklist={list} />}
-            {!list && 'Создайте новый или выберите существующий чеклист'}
+		localStorage.setItem('lists', json)
+  }
+
+  render() {
+    const list = this.props.lists.find(list => Number(list.id) === Number(this.id = this.props.match.params.id));
+
+    return (
+      <section className="checklists">
+        <div className="checklists__container">
+          <h1>Чеклисты</h1>
+          <div className="checklists__wrapper">
+            <Sidebar />
+            <div className="checklist">
+              {list && <Checklist checklist={list} />}
+              {!list && 'Создайте новый или выберите существующий чеклист'}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  )
+      </section>
+    )
+  }
 }
 
 const mapStateToProps = state => {
@@ -30,4 +37,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, null)(Checklists);
+export default withRouter(connect(mapStateToProps, null)(Checklists));

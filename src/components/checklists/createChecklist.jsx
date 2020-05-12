@@ -46,7 +46,7 @@ class CreateChecklist extends React.Component {
 
 	render() {
 		return (
-			<form className="checklists-create" onSubmit={this.sendCreateChecklist}>
+			<form className="checklists-create checklists-create_visible" onSubmit={this.sendCreateChecklist}>
 				<input
 					type="text"
 					className="checklists-create__input input"

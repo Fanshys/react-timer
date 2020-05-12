@@ -1,4 +1,4 @@
-import { CHECKLIST_CHANGE_CHECKED, CREATE_CHECKLIST, CREATE_CHECKLIST_ITEM, LOAD_LISTS } from "./actions";
+import { CHECKLIST_CHANGE_CHECKED, CREATE_CHECKLIST, CREATE_CHECKLIST_ITEM, LOAD_LISTS, DELETE_CHECKLIST } from "./actions";
 
 const defaultState = {
 	lists: []
@@ -46,6 +46,14 @@ export const checklistsReducer = (state = defaultState, action) => {
 			return {
 				...state,
 				lists: [...state.lists, ...action.payload]
+			}
+
+		case DELETE_CHECKLIST:
+			return {
+				...state,
+				lists: state.lists.filter(list => {
+					return list.id !== action.payload
+				})
 			}
 
 		default:

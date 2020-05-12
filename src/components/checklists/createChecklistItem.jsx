@@ -20,7 +20,8 @@ class CreateChecklistItem extends React.Component {
 				id: this.props.id,
 				item: {
 					id: new Date().getTime(),
-					name: this.state.name
+					name: this.state.name,
+					checked: false
 				}
 			}
 	
@@ -30,7 +31,7 @@ class CreateChecklistItem extends React.Component {
 			})
 		} else {
 			this.props.showNotice({
-				text: 'Введите название чеклиста'
+				text: 'Введите название пункта'
 			})
 
 			setTimeout(() => this.props.hideNotice(), 3000)
@@ -48,7 +49,7 @@ class CreateChecklistItem extends React.Component {
 
 	render() {
 		return (
-			<form className="checklists-create" onSubmit={this.sendCreateChecklistItem}>
+			<form className={`checklists-create checklists-create_inner ${this.props.visible ? 'checklists-create_visible' : ''}`} onSubmit={this.sendCreateChecklistItem}>
 				<input
 					type="text"
 					className="checklists-create__input input"

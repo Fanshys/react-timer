@@ -14,13 +14,20 @@
 		overflow: auto
 	&-item
 		width: 100%
-		display: block
+		display: flex
+		align-items: center
+		justify-content: space-between
 		position: relative
 		transition-duration: .3s
+		padding-right: 25px
 		&:hover
 			background-color: rgba($text, .3)
 			&::after
 				opacity: 0
+			.sidebar-item__delete
+				opacity: 1
+				transform: none
+				pointer-events: auto
 		&::after
 			content: ""
 			display: block
@@ -41,8 +48,28 @@
 			padding: 10px 30px
 			display: block
 			transition-duration: .15s
+			width: 100%
 			&_active
 				color: $red
+		&__delete
+			border: none
+			background: none
+			margin: 0
+			padding: 0
+			opacity: 0
+			pointer-events: none
+			transform: translateX(-5px)
+			transition-duration: .3s
+			cursor: pointer
+			&:hover
+				svg
+					path
+						fill: $light-text
+			svg
+				width: 15px
+				path
+					fill: $text
+					transition-duration: .3s
 	&__create
 		position: absolute
 		bottom: 10px

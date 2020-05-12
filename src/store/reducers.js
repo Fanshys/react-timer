@@ -6,5 +6,5 @@ import { noticeReducer } from "./notice/reducers";
 export default combineReducers({
 	timers: timersReducer,
 	lists: checklistsReducer,
-	notice: noticeReducer
+	notice: noticeReducer,
 });

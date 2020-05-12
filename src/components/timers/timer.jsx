@@ -7,21 +7,22 @@ class Timer extends React.Component {
 		super(props);
 		
 		this.startTime = new Date();
-		this.running = false;
+		this.running = false
 	}
 
 	start() {
 		this.startTime = new Date() - this.props.timeValue;
-		this.running = true;
+		this.running = true
 		this.tick();
 	}
 
 	pause() {
-		this.running = false;
+		this.running = false
+		this.tick()
 	}
 
 	stop() {
-		this.running = false;
+		this.running = false
 		this.props.setTimerTime({
 			id: this.props.id,
 			time: 0
@@ -29,12 +30,12 @@ class Timer extends React.Component {
 	}
 
 	tick() {
+		this.props.setTimerTime({
+			id: this.props.id,
+			time: new Date() - this.startTime
+		})
+		document.title = `${this.timeConvert()} - ${this.props.name}`
 		if (this.running) {
-			this.props.setTimerTime({
-				id: this.props.id,
-				time: new Date() - this.startTime
-			})
-
 			setTimeout(() => {
 				this.tick();
 			}, 1000);
@@ -67,12 +68,12 @@ class Timer extends React.Component {
 				<span className="timer__name">{this.props.name}</span>
 				<span className="timer__value">{this.timeConvert()}</span>
 				<div className="timer__buttons">
-					<button className="timer__button" onClick={() => this.start()}>
+					<button className={`timer__button ${this.running ? 'timer__button_hide' : ''}`} onClick={() => this.start()}>
 						<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
 							<path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
 						</svg>
 					</button>
-					<button className="timer__button" onClick={() => this.pause()}>
+					<button className={`timer__button ${this.running ? '' : 'timer__button_hide'}`} onClick={() => this.pause()}>
 						<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
 							<path d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z"></path>
 						</svg>

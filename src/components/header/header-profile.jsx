@@ -18,8 +18,8 @@ class HeaderProfile extends React.Component {
 		} else {
 			return (
 				<div className="header-profile">
-					<button className="button header-profile__button" onClick={() => this.setState({authorized: true})}>Войти</button>
-					<button className="button button_fill header-profile__button">Регистрация</button>
+					<Link to="/auth/login" className="button header-profile__button">Войти</Link>
+					<Link to="/auth/register" className="button button_fill header-profile__button">Регистрация</Link>
 				</div>
 			)
 		}
